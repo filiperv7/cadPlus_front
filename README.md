@@ -18,29 +18,28 @@ CadPLus é um gerenciador hospitalar de funcionários e pacientes. Nele você po
 5. Usuários podem editar tudo em si mesmos (exceto "EstadoSaude").
 
 ## Algumas decisões e observações
-Decidi usar o Tailwind CSS somente por questão de velocidade na estilização, já que não é necessariamente o foco do projeto, para focar mais na funcionalidade e qualidade do código.
+Decidi usar o Tailwind CSS somente por questão de velocidade naestilização, já que não é necessariamente o foco do projeto, para focar mais na funcionalidade e qualidade do código.
 Além disso, também existe um usuário padrão que é criado no banco de dados ao rodar o projeto [Back-end](https://github.com/filiperv7/cadPlus_back), que pode ser editado depois de acessar a aplicação.
 Email: admin@default.com, Senha: Adm!n123
 
-## Como rodar a aplicação
-
-##### - Clone o projeto
+## Como rodar a aplicação (4 passos)
+##### 1. Clone o projeto
 ```bash
 git clone https://github.com/filiperv7/cadPlus_front
 ```
 
-##### - Acesse a pasta do projeto
+##### 2. Acesse a pasta do projeto
 ```bash
 cd cadPlus_front
 ```
 
-##### - Faça a instalação dos pacotes
+##### 3. Faça a instalação dos pacotes
 
 ```bash
 npm install
 ```
 
-##### - Rode a aplicação
+##### 4. Rode a aplicação
 
 ```bash
 npm run dev
@@ -48,3 +47,5 @@ npm run dev
 
 ##### E pronto! A aplicação já está rodando
 Agora é só acessar http://localhost:5173/ e, desde que a aplicação back-end também esteja de pé, você vai conseguir fazer login.
+
+##### Obs.: para uma experiência completa, não deixe de rodar também o [Back-end](https://github.com/filiperv7/cadPlus_back)
