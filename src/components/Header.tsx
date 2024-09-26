@@ -1,20 +1,51 @@
 import { CaretLeft } from '@phosphor-icons/react'
+import { useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { UserResponseDto } from '../types/UserTypes'
+import { Modal } from './Modal'
 
 interface HeaderProps {
   user: UserResponseDto | null
-  userProfile: number | null
+  userProfile?: number | null
 }
 
 export const Header: React.FC<HeaderProps> = ({ user, userProfile }) => {
+  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false)
+
+  const navigate = useNavigate()
+  const location = useLocation()
+
   const firstName = user?.name.split(' ').shift()
   const lastName = user?.name.split(' ').pop()
-  const userName = `${firstName} ${lastName}`
+  let userName = firstName
+  if (user?.name.split(' ') != undefined && user?.name.split(' ').length != 1)
+    userName = `${firstName} ${lastName}`
+
+  const handleLogout = () => {
+    localStorage.removeItem('token')
+    window.location.href = '/login'
+  }
+
+  const handleBackClick = () => {
+    if (location.pathname !== '/') {
+      // Se a rota atual não for "/", redirecione para "/"
+      navigate('/')
+    } else {
+      // Se a rota for "/", abre o modal de logout
+      setIsLogoutModalOpen(true)
+    }
+  }
 
   return (
     <div className="max-w-5xl flex items-center justify-between h-14">
       <div className="flex items-center gap-2">
-        <CaretLeft size={26} weight="bold" className="text-[#8C22BC] mt-1" />
+        <CaretLeft
+          size={26}
+          weight="bold"
+          className="text-[#8C22BC] mt-1 cursor-pointer"
+          onClick={handleBackClick}
+        />
+
         <h2 className="text-2xl">
           Cad<span className="text-[#8C22BC] font-bold">Plus</span>
         </h2>
@@ -25,7 +56,7 @@ export const Header: React.FC<HeaderProps> = ({ user, userProfile }) => {
           <a href="/contact" className="duration-1000 hover:underline">
             Entre em contato
           </a>
-          <a href="/contact" className="duration-1000 hover:underline">
+          <a href="/my_profile" className="duration-1000 hover:underline">
             Meu Perfil
           </a>
         </div>
@@ -41,6 +72,14 @@ export const Header: React.FC<HeaderProps> = ({ user, userProfile }) => {
           )}
         </p>
       </div>
+
+      <Modal
+        isOpen={isLogoutModalOpen}
+        onClose={() => setIsLogoutModalOpen(false)}
+        title="Sair"
+        content={<p>Tem certeza que deseja sair?</p>}
+        onConfirm={handleLogout}
+      />
     </div>
   )
 }
