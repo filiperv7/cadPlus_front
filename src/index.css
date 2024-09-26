@@ -24,3 +24,19 @@ body {
   font-size: 0.8rem;
   color: rgb(228, 26, 26);
 }
+
+@media (max-width: 645px) {
+  :root {
+    font-size: 80%;
+  }
+
+  .welcome {
+    display: none;
+  }
+}
+
+@media (max-width: 330px) {
+  :root {
+    font-size: 75%;
+  }
+}

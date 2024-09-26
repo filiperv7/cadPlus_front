@@ -38,7 +38,7 @@ export const Header: React.FC<HeaderProps> = ({ user, userProfile }) => {
 
   return (
     <div className="max-w-5xl flex items-center justify-between h-14">
-      <div className="flex items-center gap-2">
+      <div className="flex items-center">
         <CaretLeft
           size={26}
           weight="bold"
@@ -61,7 +61,7 @@ export const Header: React.FC<HeaderProps> = ({ user, userProfile }) => {
           </a>
         </div>
 
-        <p className="flex flex-col items-end mt-2">
+        <p className="flex flex-col items-end mt-2 welcome">
           <span>
             Bem-vindo(a) <span className="font-bold">{userName}</span>!
           </span>

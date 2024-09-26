@@ -73,7 +73,7 @@ export const MyProfile: React.FC = () => {
   }
 
   return (
-    <div className="flex flex-col gap-4 max-w-5xl px-2">
+    <div className="flex flex-col gap-4 max-w-5xl px-3">
       <Header user={currentUser} />
 
       <h1 className="text-2xl font-medium">Editar Perfil</h1>

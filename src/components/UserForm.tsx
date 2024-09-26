@@ -92,7 +92,7 @@ export const UserForm = <T extends UserUpdateDto | UserCreationDto>({
               />
             </div>
 
-            <div>
+            <div className="w-full">
               <div className="flex items-center gap-2">
                 <label className="font-medium" htmlFor="name">
                   Nome:
@@ -100,7 +100,7 @@ export const UserForm = <T extends UserUpdateDto | UserCreationDto>({
                 <Field
                   id="name"
                   name="name"
-                  className="w-96 p-1 pl-2 border rounded-md outline-none"
+                  className="max-w-[29.4rem] w-full p-1 pl-2 border rounded-md outline-none"
                 />
               </div>
 
@@ -112,8 +112,8 @@ export const UserForm = <T extends UserUpdateDto | UserCreationDto>({
             </div>
           </div>
 
-          <div className="flex items-center gap-4">
-            <div>
+          <div className="w-full flex items-center gap-4">
+            <div className="w-full">
               <div className="flex items-center gap-2">
                 <label className="font-medium" htmlFor="email">
                   Email:
@@ -121,7 +121,7 @@ export const UserForm = <T extends UserUpdateDto | UserCreationDto>({
                 <Field
                   id="email"
                   name="email"
-                  className="w-96 p-1 pl-2 border rounded-md outline-none"
+                  className="w-full p-1 pl-2 border rounded-md outline-none"
                 />
               </div>
 
@@ -132,15 +132,15 @@ export const UserForm = <T extends UserUpdateDto | UserCreationDto>({
               />
             </div>
 
-            <div>
-              <div className="flex items-center gap-2">
+            <div className="w-full">
+              <div className="flex items-center gap-2 w-full">
                 <label className="font-medium" htmlFor="phone">
                   Telefone:
                 </label>
                 <Field
                   id="phone"
                   name="phone"
-                  className="w-[10.5rem] p-1 pl-2 border rounded-md outline-none"
+                  className="max-w-48 w-full p-1 pl-2 border rounded-md outline-none"
                 />
               </div>
 
@@ -153,9 +153,9 @@ export const UserForm = <T extends UserUpdateDto | UserCreationDto>({
           </div>
 
           {!isEditMode && (
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 w-full">
               <div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 w-full">
                   <label className="font-medium" htmlFor="password">
                     Senha:
                   </label>
@@ -163,7 +163,7 @@ export const UserForm = <T extends UserUpdateDto | UserCreationDto>({
                     id="password"
                     name="password"
                     type="password"
-                    className="w-96 p-1 pl-2 border rounded-md outline-none"
+                    className="max-w-96 w-full p-1 pl-2 border rounded-md outline-none"
                   />
                 </div>
 

@@ -37,7 +37,7 @@ export const Contact = () => {
   }
 
   return (
-    <div>
+    <div className="px-3">
       <Header user={currentUser} />
 
       <div className="h-screen flex flex-col  mt-4 text-center">

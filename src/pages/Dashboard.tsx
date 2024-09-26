@@ -81,12 +81,12 @@ export const Dashboard: React.FC = () => {
   }
 
   return (
-    <div className="flex flex-col gap-4 max-w-5xl px-2">
+    <div className="flex flex-col gap-4 max-w-5xl px-3">
       <Header user={currentUser} userProfile={userProfile}></Header>
-      <div className="flex flex-col gap-2 flex-1">
+      <div className="flex flex-col gap-2">
         {userProfile === 1 && (
           <div>
-            <div className="pb-3 flex gap-2 justify-end font-semibold text-white">
+            <div className="pb-3 flex gap-2 font-semibold text-white">
               <a
                 href="/patient_check_in"
                 className="p-2 bg-[#8C22BC] rounded-lg"

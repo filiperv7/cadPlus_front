@@ -15,7 +15,7 @@ export const AddressGroup: React.FC<AddressGroupProps> = ({
   return (
     <div className="flex flex-col gap-2 border p-4 rounded mb-4">
       <div className="flex gap-4">
-        <div>
+        <div className="w-full">
           <div className="flex items-center gap-2">
             <label
               className="font-medium"
@@ -26,7 +26,7 @@ export const AddressGroup: React.FC<AddressGroupProps> = ({
             <Field
               id={`addresses[${index}].zipCode`}
               name={`addresses[${index}].zipCode`}
-              className="p-1 pl-2 border rounded-md outline-none"
+              className="max-w-40 w-full p-1 pl-2 border rounded-md outline-none"
             />
           </div>
 
@@ -37,7 +37,7 @@ export const AddressGroup: React.FC<AddressGroupProps> = ({
           />
         </div>
 
-        <div>
+        <div className="w-full">
           <div className="flex items-center gap-2">
             <label
               className="font-medium"
@@ -48,7 +48,7 @@ export const AddressGroup: React.FC<AddressGroupProps> = ({
             <Field
               id={`addresses[${index}].street`}
               name={`addresses[${index}].street`}
-              className="p-1 pl-2 border rounded-md outline-none"
+              className="w-full p-1 pl-2 border rounded-md outline-none"
             />
           </div>
 
@@ -61,7 +61,7 @@ export const AddressGroup: React.FC<AddressGroupProps> = ({
       </div>
 
       <div className="flex gap-4">
-        <div>
+        <div className="w-full">
           <div className="flex items-center gap-2">
             <label
               className="font-medium"
@@ -72,7 +72,7 @@ export const AddressGroup: React.FC<AddressGroupProps> = ({
             <Field
               id={`addresses[${index}].state`}
               name={`addresses[${index}].state`}
-              className="p-1 pl-2 border rounded-md outline-none"
+              className="w-full p-1 pl-2 border rounded-md outline-none"
             />
           </div>
 
@@ -83,7 +83,7 @@ export const AddressGroup: React.FC<AddressGroupProps> = ({
           />
         </div>
 
-        <div>
+        <div className="w-full">
           <div className="flex items-center gap-2">
             <label className="font-medium" htmlFor={`addresses[${index}].city`}>
               Cidade:
@@ -91,7 +91,7 @@ export const AddressGroup: React.FC<AddressGroupProps> = ({
             <Field
               id={`addresses[${index}].city`}
               name={`addresses[${index}].city`}
-              className="p-1 pl-2 border rounded-md outline-none"
+              className="w-full p-1 pl-2 border rounded-md outline-none"
             />
           </div>
 
