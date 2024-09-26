@@ -17,6 +17,11 @@ CadPLus é um gerenciador hospitalar de funcionários e pacientes. Nele você po
 4. Somente Perfis "Médico(a)" ou "Enfermeiro(a)" podem evoluir um "Paciente".
 5. Usuários podem editar tudo em si mesmos (exceto "EstadoSaude").
 
+## Algumas decisões e observações
+Decidi usar o Tailwind CSS somente por questão de velocidade na estilização, já que não é necessariamente o foco do projeto, para focar mais na funcionalidade e qualidade do código.
+Além disso, também existe um usuário padrão que é criado no banco de dados ao rodar o projeto [Back-end](https://github.com/filiperv7/cadPlus_back), que pode ser editado depois de acessar a aplicação.
+Email: admin@default.com, Senha: Adm!n123
+
 ## Como rodar a aplicação
 
 ##### - Clone o projeto
