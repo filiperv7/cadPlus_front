@@ -1,4 +1,3 @@
-// ListUsers.tsx
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { UserResponseDto } from '../types/UserTypes'

@@ -28,10 +28,8 @@ export const Header: React.FC<HeaderProps> = ({ user, userProfile }) => {
 
   const handleBackClick = () => {
     if (location.pathname !== '/') {
-      // Se a rota atual não for "/", redirecione para "/"
       navigate('/')
     } else {
-      // Se a rota for "/", abre o modal de logout
       setIsLogoutModalOpen(true)
     }
   }
