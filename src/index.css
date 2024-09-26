@@ -19,3 +19,8 @@ body {
 
   padding-bottom: 0.9rem;
 }
+
+.errorMessage {
+  font-size: 0.8rem;
+  color: rgb(228, 26, 26);
+}

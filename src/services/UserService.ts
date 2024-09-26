@@ -1,9 +1,6 @@
 import axios, { AxiosError } from 'axios'
-import {
-  UserCreationDto,
-  UserResponseDto,
-  UserUpdateDto
-} from '../types/UserTypes'
+import { UserResponseDto, UserUpdateDto } from '../types/UserTypes'
+import { UserCreationDto } from './../types/UserTypes'
 
 class UserService {
   private baseUrl: string
@@ -27,6 +24,7 @@ class UserService {
       const response = await axios.post(`${this.baseUrl}/create`, userDto, {
         headers: this.getAuthHeaders()
       })
+
       return { message: response.data.message, status: response.status }
     } catch (error) {
       const axiosError = error as AxiosError
@@ -49,6 +47,7 @@ class UserService {
       const response = await axios.put(`${this.baseUrl}/update`, userDto, {
         headers: this.getAuthHeaders()
       })
+
       return { message: response.data.message, status: response.status }
     } catch (error) {
       const axiosError = error as AxiosError
@@ -71,6 +70,7 @@ class UserService {
       const response = await axios.get(`${this.baseUrl}?id=${id}`, {
         headers: this.getAuthHeaders()
       })
+
       return { user: response.data, status: response.status }
     } catch (error) {
       const axiosError = error as AxiosError
@@ -88,6 +88,7 @@ class UserService {
       const response = await axios.delete(`${this.baseUrl}/${id}`, {
         headers: this.getAuthHeaders()
       })
+
       return { message: response.data.message, status: response.status }
     } catch (error) {
       const axiosError = error as AxiosError
@@ -110,12 +111,83 @@ class UserService {
       const response = await axios.get(`${this.baseUrl}/profile/${idProfile}`, {
         headers: this.getAuthHeaders()
       })
+
       return { users: response.data, status: response.status }
     } catch (error) {
       const axiosError = error as AxiosError
 
       if (axiosError.response) {
         return { users: [], status: axiosError.response.status }
+      }
+
+      throw new Error('An unexpected error occurred.')
+    }
+  }
+
+  async checkInPatientWithExistingUser(
+    userId: string
+  ): Promise<{ message: string; status: number }> {
+    try {
+      const response = await axios.put(
+        `${this.baseUrl}/check_in_patient/existing_user/${userId}`,
+        {},
+        {
+          headers: this.getAuthHeaders()
+        }
+      )
+
+      return { message: response.data.message, status: response.status }
+    } catch (error) {
+      const axiosError = error as AxiosError
+
+      if (axiosError.response) {
+        return { message: '', status: axiosError.response.status }
+      }
+
+      throw new Error('An unexpected error occurred.')
+    }
+  }
+
+  async evolvePatient(
+    userId: string,
+    healthStatus: number
+  ): Promise<{ message: string; status: number }> {
+    try {
+      const response = await axios.put(
+        `${this.baseUrl}/evolve_patient/${userId}`,
+        { healthStatus },
+        {
+          headers: this.getAuthHeaders()
+        }
+      )
+
+      return { message: response.data.message, status: response.status }
+    } catch (error) {
+      const axiosError = error as AxiosError
+
+      if (axiosError.response) {
+        return { message: '', status: axiosError.response.status }
+      }
+
+      throw new Error('An unexpected error occurred.')
+    }
+  }
+
+  async getInfosOfLoggedUser(): Promise<{
+    user: UserResponseDto | null
+    status: number
+  }> {
+    try {
+      const response = await axios.get(`${this.baseUrl}/infos_of_logged_user`, {
+        headers: this.getAuthHeaders()
+      })
+
+      return { user: response.data, status: response.status }
+    } catch (error) {
+      const axiosError = error as AxiosError
+
+      if (axiosError.response) {
+        return { user: null, status: axiosError.response.status }
       }
 
       throw new Error('An unexpected error occurred.')

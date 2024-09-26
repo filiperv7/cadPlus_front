@@ -1,10 +1,12 @@
 // ListUsers.tsx
-import React from 'react'
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { UserResponseDto } from '../types/UserTypes'
+import { Modal } from './Modal'
 
 interface ListUsersProps {
   users: UserResponseDto[]
-  onEdit: (userId: string) => void
+  onEdit: (userId: string, healthStatus?: number) => void
   isPatient: boolean
   onEditName?: string
   onDelete?: (userId: string) => void
@@ -17,6 +19,43 @@ export const ListUsers: React.FC<ListUsersProps> = ({
   onDelete,
   isPatient
 }) => {
+  const [isModalEditOpen, setIsModalEditOpen] = useState(false)
+  const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false)
+  const [selectedUserId, setSelectedUserId] = useState<string | null>(null)
+  const [healthStatus, setHealthStatus] = useState<number>(1)
+
+  const navigate = useNavigate()
+
+  const confirmDelete = (userId: string) => {
+    setSelectedUserId(userId)
+    setIsModalDeleteOpen(true)
+  }
+
+  const handleDelete = async () => {
+    if (selectedUserId && onDelete) {
+      onDelete(selectedUserId)
+    }
+
+    setIsModalDeleteOpen(false)
+  }
+
+  const confirmEdit = (userId: string) => {
+    if (onEditName === 'Editar') {
+      navigate(`/edit_user/${userId}`)
+    } else {
+      setSelectedUserId(userId)
+      setIsModalEditOpen(true)
+    }
+  }
+
+  const handleEdit = () => {
+    if (selectedUserId) {
+      onEdit(selectedUserId, healthStatus)
+    }
+
+    setIsModalEditOpen(false)
+  }
+
   return (
     <>
       <h1 className="text-2xl font-medium pb-2">
@@ -39,14 +78,14 @@ export const ListUsers: React.FC<ListUsersProps> = ({
             </div>
             <div>
               <button
-                onClick={() => onEdit(user.id)}
+                onClick={() => confirmEdit(user.id)}
                 className="text-blue-500 hover:underline mr-2"
               >
                 {onEditName ?? 'Editar'}
               </button>
               {onDelete && (
                 <button
-                  onClick={() => onDelete(user.id)}
+                  onClick={() => confirmDelete(user.id)}
                   className="text-red-500 hover:underline"
                 >
                   Excluir
@@ -56,6 +95,37 @@ export const ListUsers: React.FC<ListUsersProps> = ({
           </div>
         ))}
       </div>
+
+      <Modal
+        isOpen={isModalDeleteOpen}
+        onClose={() => setIsModalDeleteOpen(false)}
+        title="Confirmar Exclusão"
+        content={<p>Você realmente deseja excluir este usuário?</p>}
+        onConfirm={handleDelete}
+      />
+
+      <Modal
+        isOpen={isModalEditOpen}
+        onClose={() => setIsModalEditOpen(false)}
+        title="Evoluir Paciente"
+        content={
+          <div>
+            <label htmlFor="healthStatus">Novo Estado de Saúde:</label>
+            <input
+              id="healthStatus"
+              type="number"
+              min={1}
+              max={4}
+              value={healthStatus}
+              onChange={e => setHealthStatus(Number(e.target.value))}
+              className="border rounded p-2 w-full"
+            />
+          </div>
+        }
+        onConfirm={handleEdit}
+        confirmText="Evoluir Paciente"
+        cancelText="Cancelar"
+      />
     </>
   )
 }

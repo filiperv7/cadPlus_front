@@ -25,14 +25,7 @@ export const Dashboard: React.FC = () => {
       }
 
       try {
-        // ids para consultas temporárias
-        // id de admin: 10fd012e-2a0d-48e7-ade7-185ae99d0dbc
-        // id de médico: 90571f04-4d87-4568-b950-d482d09c0ea6
-        // id de paciente: baa34c8b-fb5c-486f-86bf-541bd52146c2
-
-        const { user, status } = await UserService.findUserById(
-          '10fd012e-2a0d-48e7-ade7-185ae99d0dbc'
-        ) // TEMPORÁRIO! todo: criar rota de infos do usuário logado
+        const { user, status } = await UserService.getInfosOfLoggedUser()
 
         if (status === 200 && user) {
           setCurrentUser(user)
@@ -65,6 +58,28 @@ export const Dashboard: React.FC = () => {
     return <Navigate to="/login" />
   }
 
+  const deleteUser = async (userId: string) => {
+    const { status } = await UserService.deleteUser(userId)
+
+    if (status === 200) {
+      setUsers(prevUsers => prevUsers.filter(user => user.id !== userId))
+    }
+  }
+
+  const evolvePatient = async (userId: string, healthStatus?: number) => {
+    if (healthStatus) {
+      const { status } = await UserService.evolvePatient(userId, healthStatus)
+
+      if (status === 200) {
+        setUsers(prevUsers =>
+          prevUsers.map(user =>
+            user.id === userId ? { ...user, healthStatus } : user
+          )
+        )
+      }
+    }
+  }
+
   return (
     <div className="flex flex-col gap-4 max-w-5xl px-2">
       <Header user={currentUser} userProfile={userProfile}></Header>
@@ -72,12 +87,18 @@ export const Dashboard: React.FC = () => {
         {userProfile === 1 && (
           <div>
             <div className="pb-3 flex gap-2 justify-end font-semibold text-white">
-              <button className="p-2 bg-[#8C22BC] rounded-lg">
+              <a
+                href="/patient_check_in"
+                className="p-2 bg-[#8C22BC] rounded-lg"
+              >
                 Dar entrada de Paciente
-              </button>
-              <button className="p-2 bg-[#E66251] rounded-lg">
+              </a>
+              <a
+                href="/register_employee"
+                className="p-2 bg-[#E66251] rounded-lg"
+              >
                 Cadastrar Funcionário
-              </button>
+              </a>
             </div>
 
             <UserFilter
@@ -88,7 +109,8 @@ export const Dashboard: React.FC = () => {
             <ListUsers
               users={users}
               onEdit={id => console.log(`Editar ${id}`)}
-              onDelete={id => console.log(`Excluir ${id}`)}
+              onDelete={id => deleteUser(id)}
+              onEditName="Editar"
               isPatient={selectedProfile === 4}
             />
           </div>
@@ -97,7 +119,7 @@ export const Dashboard: React.FC = () => {
         {(userProfile === 2 || userProfile === 3) && (
           <ListUsers
             users={users}
-            onEdit={id => console.log(`Evoluir ${id}`)}
+            onEdit={evolvePatient}
             onEditName="Evoluir"
             isPatient={true}
           />
