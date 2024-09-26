@@ -64,7 +64,7 @@ export const MyProfile: React.FC = () => {
     if (status === 200) {
       navigate('/')
     } else {
-      alert('Erro ao editar usuário, verifique se o CPF é válido.')
+      alert('Erro ao editar perfil, verifique se o CPF é válido.')
     }
   }
 
@@ -76,7 +76,7 @@ export const MyProfile: React.FC = () => {
     <div className="flex flex-col gap-4 max-w-5xl px-2">
       <Header user={currentUser} />
 
-      <h1 className="text-2xl font-medium">Editar Usuário</h1>
+      <h1 className="text-2xl font-medium">Editar Perfil</h1>
       <UserForm initialValues={formValues} onSubmit={edit} isEditMode />
     </div>
   )

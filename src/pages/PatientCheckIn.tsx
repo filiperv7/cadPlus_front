@@ -49,7 +49,7 @@ export const PatientCheckIn: React.FC = () => {
     if (status === 200) {
       navigate('/')
     } else {
-      alert('Erro ao editar usuário, verifique se o CPF é válido.')
+      alert('Erro ao dar entrada de paciente, verifique se o CPF é válido.')
     }
   }
 
@@ -61,7 +61,7 @@ export const PatientCheckIn: React.FC = () => {
     <div className="flex flex-col gap-4 max-w-5xl px-2">
       <Header user={currentUser} />
 
-      <h1 className="text-2xl font-medium">Editar Usuário</h1>
+      <h1 className="text-2xl font-medium">Dar entrada de Paciente</h1>
       <UserForm
         initialValues={initialValues}
         onSubmit={register}
